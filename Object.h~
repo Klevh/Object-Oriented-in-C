@@ -1,0 +1,12 @@
+#ifndef _OOC_BY_KLEVH_
+#define _OOC_BY_KLEVH_
+
+#include <stdio.h>
+#include <stdarg.h>
+#include <stdlib.h>
+
+void * new(const void * type, ...);
+void * delete(void * self);
+void * clone(void * _self);
+
+#endif
