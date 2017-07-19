@@ -7,12 +7,12 @@ struct Coord{
   int y;
 };
 
-void * Coord_ctor(void * _self, va_list * ap);
+void * Coord_ctor(void * _self, va_list ap);
 int getX(void * self);
 int getY(void * self);
 
 static const struct Class _Coord = {
-  sizeof(struct Coord),0,
+  sizeof(struct Coord),
   Coord_ctor, NULL,NULL
 };
 const void * Coord = &_Coord;
@@ -24,11 +24,11 @@ struct Coord3D{
   int z;
 };
 
-void * Coord3D_ctor(void * _self, va_list * ap);
+void * Coord3D_ctor(void * _self, va_list ap);
 int getZ(void * self);
 
 static const struct Class _Coord3D = {
-  sizeof(struct Coord3D),sizeof(struct Coord),
+  sizeof(struct Coord3D),
   Coord3D_ctor, NULL,NULL
 };
 const void * Coord3D=&_Coord3D;
@@ -49,34 +49,33 @@ int main()
 }
 
 /* Coord3D implementation */
-void * Coord3D_ctor(void * _self, va_list * ap){
-  struct Coord3D * self = translate(Coord3D,_self);
-  super(_self,Coord,NULL);
-  self=Coord_ctor(_self,*ap);
-  self->z=va_arg(*ap,int);
+void * Coord3D_ctor(void * _self, va_list ap){
+  struct Coord3D * self = _self;
+  self=Coord_ctor(_self,ap);
+  self->z=va_arg(ap,int);
   return (void *)self;
 }
 
 int getZ(void * self){
-  struct Coord3D * c = translate(Coord3D,self);
+  struct Coord3D * c = self;
   return c->z;
 }
 
 /* Coord implementation */
-void * Coord_ctor(void * _self, va_list * ap){
-  struct Coord * self=translate(Coord,_self);
+void * Coord_ctor(void * _self, va_list ap){
+  struct Coord * self=_self;
   self->x=va_arg(ap,int);
   self->y=va_arg(ap,int);
   return (void *) self;
 }
 
 int getX(void * self){
-  struct Coord * c = translate(Coord,self);
+  struct Coord * c = self;
   return c->x;
 }
 
 int getY(void * self){
-  struct Coord * c = translate(Coord,self);
+  struct Coord * c = self;
   return c->y;
 }
 /* -------------- */
