@@ -18,6 +18,11 @@ void * new(const void * type, ...){
   return p;
 }
 
+void _delete(void ** self){
+    if(self)
+        delete(*self);
+}
+
 void delete(void *self){
   const struct Class ** cp = self;
 	

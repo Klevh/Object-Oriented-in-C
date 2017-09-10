@@ -5,6 +5,10 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+#ifdef __GNUC__
+#define OBJECT __attribute__((__cleanup__(_delete)))
+#endif
+
 struct Class{
   size_t size;
   void * (*ctor)(void * self,va_list args);
@@ -15,5 +19,7 @@ struct Class{
 void * new(const void * type, ...);
 void delete(void * self);
 void * clone(void * _self);
+
+void _delete(void ** self);
 
 #endif
