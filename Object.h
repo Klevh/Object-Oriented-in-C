@@ -7,6 +7,8 @@
 
 #ifdef __GNUC__
 #define OBJECT __attribute__((__cleanup__(_delete)))
+#else
+#error "OOC is GNU-C compatible, recompile it with a GNU compiler"
 #endif
 
 struct Class{
